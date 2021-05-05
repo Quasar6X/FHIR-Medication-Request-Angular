@@ -1,0 +1,26 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <a mat-button [routerLink]="[ '/home' ]">
+            <mat-icon class="hero-icon">local_hospital</mat-icon>
+            <span>Medication Requests</span>
+        </a>
+        <span style="flex: 1 1;"></span>
+        <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>account_circle</mat-icon>
+            <ng-container *ngIf="user">
+                {{user.displayName}}&nbsp;
+            </ng-container>
+            <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="editProfile()">
+                <mat-icon>person</mat-icon>
+                <span>Profile</span>
+            </button>
+            <button mat-menu-item (click)="logout()">
+                <mat-icon>arrow_back</mat-icon>
+                <span>Logout</span>
+            </button>
+        </mat-menu>
+    </mat-toolbar-row>
+</mat-toolbar>

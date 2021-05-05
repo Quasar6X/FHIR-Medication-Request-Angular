@@ -1,0 +1,243 @@
+<mat-dialog-content class="max-width" style="height: 100%; max-height: inherit">
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="submit()">
+        <mat-card-header>
+            <mat-card-title>Add new Medication Request</mat-card-title>
+        </mat-card-header>
+
+        <mat-card class="margin-bottom">
+            <mat-card-header class="margin-bottom">
+                <mat-card-title>Identifiers</mat-card-title>
+            </mat-card-header>
+            <mat-card-content formArrayName="identifier">
+                <button mat-raised-button color="accent" class="list-add-btn" (click)="addIdentifier()">
+                    <mat-icon>add</mat-icon>
+                    Identifier
+                </button>
+                <span *ngFor="let item of identifierFormArray.controls; let i = index" class="max-width form-field-container">
+                    <ng-container [formGroupName]="i">
+                        <ng-container *ngIf="i === 0">
+                            <button mat-icon-button color="accent" (click)="addCurrentUser()" style="margin: 0 1rem">
+                                <mat-icon>person_add</mat-icon>
+                                <span style="display: block; margin: -1rem 0">Add me</span>
+                            </button>
+                        </ng-container>
+                        <mat-form-field formGroupName="uid" style="flex-basis: 275px">
+                            <mat-label>UID</mat-label>
+                            <input matInput type="text" name="uid" placeholder="E.g asdqwe420BlazeIt" formControlName="value">
+                        </mat-form-field>
+                        <mat-form-field formGroupName="email">
+                            <mat-label>E-mail</mat-label>
+                            <input matInput type="email" name="email" placeholder="E.g bob@bingi.com" formControlName="value">
+                        </mat-form-field>
+                        <mat-form-field formGroupName="displayName">
+                            <mat-label>Name</mat-label>
+                            <input matInput type="text" name="displayName" placeholder="E.g BobTheBingiest" formControlName="value">
+                        </mat-form-field>
+                        <button mat-icon-button color="warn" (click)="removeIdentifier(i)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </ng-container>
+                </span>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="margin-bottom">
+            <mat-card-content>
+                <table class="max-width">
+                    <tr>
+                        <td>
+                            <mat-card-header>
+                                <mat-card-title>Status</mat-card-title>
+                            </mat-card-header>
+                            <div class="form-field-container">
+                                <mat-form-field appearance="outline" class="max-width">
+                                    <mat-label>Status</mat-label>
+                                    <mat-select formControlName="status">
+                                        <mat-option *ngFor="let status of ['active', 'on-hold', 'cancelled', 'completed', 'entered-in-error', 'stopped', 'draft', 'unknown']" [value]="status">
+                                            {{status}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </td>
+                        <td>
+                            <mat-card-header>
+                                <mat-card-title>Status reason</mat-card-title>
+                            </mat-card-header>
+                            <div class="form-field-container">
+                                <mat-form-field appearance="outline" class="max-width">
+                                    <mat-label>Reason</mat-label>
+                                    <input matInput type="text" name="statusReason" placeholder="E.g active, on-hold etc." formControlName="statusReason">
+                                </mat-form-field>
+                            </div>
+                        </td>
+                        <td>
+                            <mat-card-header>
+                                <mat-card-title>Intent</mat-card-title>
+                            </mat-card-header>
+                            <div class="form-field-container">
+                                <mat-form-field appearance="outline" class="max-width">
+                                    <mat-label>Intent</mat-label>
+                                    <mat-select formControlName="intent">
+                                        <mat-option *ngFor="let intent of ['proposal', 'plan', 'order', 'original-order', 'reflex-order', 'filler-order', 'instance-order', 'option']" [value]="intent">
+                                            {{intent}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="margin-bottom">
+            <mat-card-header class="margin-bottom">
+                <mat-card-title>Categories</mat-card-title>
+            </mat-card-header>
+            <mat-card-content formArrayName="category">
+                <button mat-raised-button color="accent" class="list-add-btn" (click)="addCategory()" [disabled]="categoryLength >= 4">
+                    <mat-icon>add</mat-icon>
+                    Category
+                </button>
+                <span *ngFor="let item of categoryFormArray.controls; let i = index" class="max-width form-field-container">
+                    <ng-container [formGroupName]="i">
+                        <mat-form-field appearance="outline" class="max-width">
+                            <mat-select formControlName="text">
+                                <mat-option *ngFor="let category of ['inpatient', 'outpatient', 'community', 'discharge']" [value]="category">
+                                    {{category}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-icon-button color="warn" (click)="removeCategory(i)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </ng-container>
+                </span>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="margin-bottom">
+            <mat-card-content>
+                <table class="max-width">
+                    <tr>
+                        <td>
+                            <mat-card-header>
+                                <mat-card-title>Priority</mat-card-title>
+                            </mat-card-header>
+                            <div class="form-field-container">
+                                <mat-form-field class="max-width" appearance="outline">
+                                    <mat-label>Priority</mat-label>
+                                    <mat-select formControlName="priority">
+                                        <mat-option *ngFor="let priority of ['', 'routine', 'urgent', 'asap', 'stat']" [value]="priority">
+                                            {{priority}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </td>
+                        <td>
+                            <mat-card-header>
+                                <mat-card-title>Perform</mat-card-title>
+                            </mat-card-header>
+                            <div class="form-field-container" style="justify-content: left">
+                                <mat-radio-group formControlName="doNotPerform">
+                                    <mat-radio-button [value]="false">Yes</mat-radio-button>
+                                    <mat-radio-button [value]="true">No</mat-radio-button>
+                                    <mat-radio-button [value]="null">None</mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </td>
+                        <td>
+                            <mat-card-header>
+                                <mat-card-title>Reported</mat-card-title>
+                            </mat-card-header>
+                            <div class="form-field-container" style="justify-content: left">
+                                <mat-radio-group formControlName="reported">
+                                    <mat-radio-button [value]="true">Yes</mat-radio-button>
+                                    <mat-radio-button [value]="false">No</mat-radio-button>
+                                    <mat-radio-button [value]="null">None</mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="margin-bottom">
+            <mat-card-content>
+                <table class="max-width">
+                    <tr>
+                        <td>
+                            <mat-card-header>
+                                <mat-card-title>Medication</mat-card-title>
+                            </mat-card-header>
+                            <div class="form-field-container">
+                                <mat-form-field class="max-width" appearance="outline">
+                                    <mat-label>Medication</mat-label>
+                                    <input matInput type="text" name="medication" placeholder="E.g Aspirin" formControlName="medication">
+                                </mat-form-field>
+                            </div>
+                        </td>
+                        <td>
+                            <mat-card-header>
+                                <mat-card-title>Subject</mat-card-title>
+                            </mat-card-header>
+                            <div class="form-field-container">
+                                <mat-form-field class="max-width" appearance="outline">
+                                    <mat-label>Subject</mat-label>
+                                    <input matInput type="text" name="subject" placeholder="E.g Bob Bingi" formControlName="subject">
+                                </mat-form-field>
+                            </div>
+                        </td>
+                        <td>
+                            <mat-card-header>
+                                <mat-card-title>Authored on</mat-card-title>
+                            </mat-card-header>
+                            <div class="form-field-container">
+                                <mat-form-field class="max-width" appearance="outline">
+                                    <mat-label>Choose a date</mat-label>
+                                    <input matInput [matDatepicker]="picker" formControlName="authoredOn">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="margin-bottom">
+            <mat-card-header class="margin-bottom">
+                <mat-card-title>Notes</mat-card-title>
+            </mat-card-header>
+            <mat-card-content formArrayName="note">
+                <button mat-raised-button color="accent" class="list-add-btn" (click)="addNote()">
+                    <mat-icon>add</mat-icon>
+                    Note
+                </button>
+                <span *ngFor="let item of noteFormArray.controls; let i = index" class="max-width form-field-container">
+                    <ng-container [formGroupName]="i">
+                        <mat-form-field appearance="outline" class="max-width" formGroupName="author">
+                            <mat-label>Author</mat-label>
+                            <input matInput type="text" name="note" placeholder="E.g Bob Bingi" formControlName="authorString">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="max-width">
+                            <mat-label>Date & Time</mat-label>
+                            <input matInput type="text" name="note" placeholder="" formControlName="time">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="max-width">
+                            <mat-label>Text</mat-label>
+                            <input matInput type="text" name="note" placeholder="I.e your beautiful thoughts" formControlName="text">
+                        </mat-form-field>
+                        <button mat-icon-button color="warn" (click)="removeNote(i)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </ng-container>
+                </span>
+            </mat-card-content>
+        </mat-card>
+    </form>
+</mat-dialog-content>

@@ -41,7 +41,7 @@ export class FbBaseService {
         }).valueChanges() as Observable<MedicationRequest[]>;
     }
 
-    getByID(collectionName: string, id: string): Observable<MedicationRequest> {
+    getByID(id: string, collectionName?: string): Observable<MedicationRequest> {
         if (collectionName === undefined) {
             collectionName = FbBaseService.MEDICATION_REQUESTS_COLLECTION_NAME;
         }

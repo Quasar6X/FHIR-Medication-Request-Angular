@@ -1,0 +1,25 @@
+.margin-bottom {
+  margin-bottom: 1.3rem;
+}
+
+.list-add-btn {
+  position: absolute;
+  right: 1em;
+  top: 1em;
+}
+
+.form-field-container {
+  display: flex;
+  align-items: center;
+  align-content: space-evenly;
+  justify-content: space-evenly;
+}
+
+mat-form-field, mat-radio-button {
+  flex: 1 1 auto;
+  margin: 0 1rem;
+}
+
+mat-option, mat-select {
+  font-size: 1.2em;
+}

@@ -1,0 +1,69 @@
+@import '~@angular/material/_theming.scss';
+
+$purple-palette: mat-palette($mat-purple);
+$orange-palette: mat-palette($mat-deep-orange);
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+mat-row.detail-row {
+  flex-basis: 0;
+  min-height: initial;
+}
+
+mat-cell {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+mat-header-cell {
+  font-size: 1em;
+  display: flex;
+  justify-content: center;
+}
+
+.request-detail {
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  align-content: space-evenly;
+  justify-content: space-evenly !important;
+  background: mat-color($purple-palette, A700);
+}
+
+.request-list-holder {
+  margin: 1rem 0;
+  background: mat-color($orange-palette, A200);
+}
+
+.mat-line {
+  font-size: 0.88em !important;
+}
+
+.request-expanded-row {
+  cursor: pointer;
+  background: mat-color($purple-palette, 700);
+}
+
+mat-row.request-row:not(.request-expanded-row):hover {
+  cursor: pointer;
+  background: mat-color($purple-palette, 700);
+}
+
+mat-row.request-row:not(.request-expanded-row):active {
+  background: mat-color($purple-palette, 700);
+}
+
+.request-row mat-cell {
+  border-bottom-width: 0;
+}
+
+.add-btn {
+  transform: scale(1.5);
+  position: fixed;
+  bottom: 4rem;
+  right: 4rem;
+}

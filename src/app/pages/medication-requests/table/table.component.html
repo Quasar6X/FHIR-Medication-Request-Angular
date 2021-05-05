@@ -1,0 +1,103 @@
+<app-container classes="container-1">
+    <mat-card class="table-container">
+        <mat-form-field class="max-width" appearance="outline" style="font-size: 1.33em; font-style: italic">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="filter($event)" placeholder="Ex. Aspirin" #input>
+        </mat-form-field>
+        <span *ngIf="isLoading else table" class="centering">
+            <mat-progress-spinner color="accent" mode="indeterminate"></mat-progress-spinner>
+        </span>
+        <ng-template #table>
+            <div class="mat-elevation-z8">
+                <mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="max-width">
+
+                    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnData">
+                        <mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"></mat-header-cell>
+                        <mat-cell *matCellDef="let request" [ngStyle]="{'width': 'calc(100% /' + (columnHeaders) + ')'}"> {{(request | asMedicationRequest)[column]}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Substitution / Allowed -->
+                    <ng-container matColumnDef="substitution.allowed">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header [ngStyle]="{'display': 'none'}"></mat-header-cell>
+                        <mat-cell *matCellDef="let row" [ngStyle]="{'width': 'calc(100% /' + (columnHeaders) + ')'}"> {{(row | asMedicationRequest)?.substitution.allowed ? 'Yes' : 'No'}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Substitution / Reason -->
+                    <ng-container matColumnDef="substitution.reason">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header [ngStyle]="{'display': 'none'}"></mat-header-cell>
+                        <mat-cell *matCellDef="let row" [ngStyle]="{'width': 'calc(100% /' + (columnHeaders) + ')'}"> {{(row | asMedicationRequest)?.substitution?.reason}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Details expanding content-->
+                    <ng-container matColumnDef="expandedDetail">
+                        <td *matCellDef="let request" [attr.colspan]="columnHeaders.length" class="max-width">
+                            <div class="request-detail" [@detailExpand]="request == expandedRequest ? 'expanded' : 'collapsed'">
+                                <mat-list class="mat-elevation-z9 request-list-holder">
+                                    <div mat-subheader>
+                                        <div>Identifiers</div>
+                                        <span style="flex: 1 1"></span>
+                                        <div style="font-style: italic">*(Users)</div>
+                                    </div>
+                                    <mat-list-item *ngFor="let user of (request | asMedicationRequest)?.identifier">
+                                        <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>
+                                        <div mat-line>Name: {{user.displayName.value}}</div>
+                                        <div mat-line>E-mail: {{user.email.value}}</div>
+                                    </mat-list-item>
+                                </mat-list>
+                                <mat-list class="mat-elevation-z9 request-list-holder">
+                                    <div mat-subheader>Categories</div>
+                                    <mat-list-item *ngFor="let category of (request | asMedicationRequest)?.category">
+                                        <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>
+                                        <div mat-line>{{category.text}}</div>
+                                    </mat-list-item>
+                                </mat-list>
+                                <mat-list class="mat-elevation-z9 request-list-holder">
+                                    <div mat-subheader>Notes</div>
+                                    <mat-list-item *ngFor="let note of (request | asMedicationRequest)?.note">
+                                        <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>
+                                        <div mat-line *ngIf="note.author">Author: {{note.author.authorString}}</div>
+                                        <div mat-line *ngIf="note.time">Time: {{note.time}}</div>
+                                        <div mat-line>Text: {{note.text}}</div>
+                                    </mat-list-item>
+                                </mat-list>
+                                <mat-list class="mat-elevation-z9 request-list-holder">
+                                    <div mat-subheader>Dosage instructions</div>
+                                    <mat-list-item *ngFor="let dosage of (request | asMedicationRequest)?.dosageInstruction">
+                                        <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>
+                                        <div mat-line>{{dosage.text}}</div>
+                                    </mat-list-item>
+                                </mat-list>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <!-- Main Column headers -->
+                    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnHeaders">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header [ngStyle]="{'width': 'calc(100% /' + (columnHeaders) + ')'}" [attr.rowspan]="2">
+                            {{column}}
+                        </mat-header-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="columnHeaders"></mat-header-row>
+
+                    <mat-row *matRowDef="let request; columns: columnData.concat(['substitution.allowed', 'substitution.reason']);"
+                             class="request-row" [class.request-expanded-row]="expandedRequest === request"
+                             (click)="expandedRequest = expandedRequest === request ? null : request">
+                    </mat-row>
+                    <tr class="mat-row" *matNoDataRow>
+                        <mat-chip-list>
+                            <mat-chip color="warn" selected style="margin: 1.33rem 0 0 1.33rem">No data matching the filter: "{{input.value}}"</mat-chip>
+                        </mat-chip-list>
+                    </tr>
+                    <mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></mat-row>
+
+                </mat-table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]"></mat-paginator>
+            </div>
+        </ng-template>
+    </mat-card>
+
+    <button mat-fab class="add-btn" (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+    </button>
+</app-container>

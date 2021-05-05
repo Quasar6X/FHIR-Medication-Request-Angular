@@ -6,19 +6,20 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { FbAuth } from './services/fb-auth.service';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFirestoreModule,
-        AngularFireAuthModule
+        AngularFireAuthModule,
+        AppRoutingModule
     ],
-    providers: [],
+    providers: [FbAuth],
     bootstrap: [AppComponent]
 })
 export class AppModule {
