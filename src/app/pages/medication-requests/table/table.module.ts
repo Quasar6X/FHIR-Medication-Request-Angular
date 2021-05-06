@@ -19,6 +19,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddModule } from '../add/add.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DeleteModule } from '../delete/delete.module';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { EditModule } from '../edit/edit.module';
 
 
 @NgModule({
@@ -43,7 +46,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
         MatButtonModule,
         MatDialogModule,
         AddModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        DeleteModule,
+        MatTooltipModule,
+        EditModule
     ]
 })
 export class TableModule { }

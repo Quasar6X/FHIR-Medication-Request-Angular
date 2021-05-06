@@ -26,6 +26,7 @@ mat-header-cell {
 }
 
 .request-detail {
+  flex-wrap: wrap;
   overflow: hidden;
   display: flex;
   align-items: flex-start;
@@ -35,8 +36,14 @@ mat-header-cell {
 }
 
 .request-list-holder {
-  margin: 1rem 0;
+  flex: 1 1 20%;
+  margin: 1rem 0.7rem;
   background: mat-color($orange-palette, A200);
+}
+
+.action-btn {
+  flex: 1 1 5%;
+  margin: 1rem 0.7rem;
 }
 
 .mat-line {

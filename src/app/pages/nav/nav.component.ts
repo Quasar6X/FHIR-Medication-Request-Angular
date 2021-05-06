@@ -22,14 +22,7 @@ export class NavComponent implements OnInit {
             if (user) {
                 this.user = user;
             } else {
-                if (this.authService.isLoggedIn) {
-                    this.authService.signOut().then().finally(() => {
-                        this.snackbar.open('Session was invalid, we have signed you out', 'OK', {duration: 10000});
-                    });
-                }
-                this.router.navigate(['/login']).then().finally(() => {
-                    this.snackbar.open('Session was invalid, we have signed you out', 'OK', {duration: 10000});
-                });
+                this.router.navigate(['/login']).then();
             }
         }).then();
     }

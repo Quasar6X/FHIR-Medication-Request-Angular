@@ -26,15 +26,6 @@ export class ProfileComponent implements OnInit {
                 this.form.get('uid').get('value').setValue(this.user.uid);
                 this.form.get('email').get('value').setValue(this.user.email);
                 this.form.get('displayName').get('value').setValue(this.user.displayName);
-            } else {
-                if (this.authService.isLoggedIn) {
-                    this.authService.signOut().then().finally(() => {
-                        this.snackbar.open('Session was invalid, we have signed you out', 'OK', {duration: 10000});
-                    });
-                }
-                this.router.navigate(['/login']).then().finally(() => {
-                    this.snackbar.open('Session was invalid, we have signed you out', 'OK', {duration: 10000});
-                });
             }
         }).then();
 

@@ -1,22 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddComponent } from './add.component';
+import { EditComponent } from './edit.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatCardModule } from '@angular/material/card';
 import { MedicationRequestFormModule } from '../../../shared/components/medication-request-form/medication-request-form.module';
 
 
 @NgModule({
     declarations: [
-        AddComponent
+        EditComponent
     ],
     imports: [
         CommonModule,
         MatDialogModule,
-        MatCardModule,
         MedicationRequestFormModule
     ],
-    exports: [AddComponent]
+    exports: [EditComponent]
 })
-export class AddModule {
+export class EditModule {
 }

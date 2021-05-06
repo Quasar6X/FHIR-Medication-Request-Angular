@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddComponent } from './add.component';
+import { DeleteComponent } from './delete.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-import { MedicationRequestFormModule } from '../../../shared/components/medication-request-form/medication-request-form.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
-    declarations: [
-        AddComponent
-    ],
+    declarations: [DeleteComponent],
     imports: [
         CommonModule,
         MatDialogModule,
         MatCardModule,
-        MedicationRequestFormModule
+        MatButtonModule,
+        MatIconModule
     ],
-    exports: [AddComponent]
+    exports: [DeleteComponent]
 })
-export class AddModule {
+export class DeleteModule {
 }

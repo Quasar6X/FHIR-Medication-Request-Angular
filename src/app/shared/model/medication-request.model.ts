@@ -2,6 +2,8 @@ import { Note } from './note.model';
 import { Dosage } from './dosage-instruction.model';
 import { Category } from './category.model';
 import { User } from './user.model';
+import firebase from 'firebase';
+import Timestamp = firebase.firestore.Timestamp;
 
 export interface MedicationRequest {
     id: string;                     // 1..1
@@ -15,7 +17,7 @@ export interface MedicationRequest {
     reported?: boolean;             // 0..1
     medication: string;             // 1..1
     subject: string;                // 1..1
-    authoredOn?: string;            // 0..1
+    authoredOn?: Timestamp;         // 0..1
     note?: Note[];                  // 0..*
     dosageInstruction?: Dosage[];   // 0..*
     substitution?: {                // 0..1

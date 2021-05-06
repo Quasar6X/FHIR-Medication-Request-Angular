@@ -48,11 +48,11 @@ export class FbBaseService {
         return this.angularFirestore.collection(collectionName).doc(id).valueChanges() as Observable<MedicationRequest>;
     }
 
-    update(id: string, medicationRequest: MedicationRequest, collectionName?: string): Promise<void> {
+    update(medicationRequest: MedicationRequest, collectionName?: string): Promise<void> {
         if (collectionName === undefined) {
             collectionName = FbBaseService.MEDICATION_REQUESTS_COLLECTION_NAME;
         }
-        return this.angularFirestore.collection(collectionName).doc(id).update(medicationRequest);
+        return this.angularFirestore.collection(collectionName).doc(medicationRequest.id).update(medicationRequest);
     }
 
     delete(id: string, collectionName?: string): Promise<void> {
