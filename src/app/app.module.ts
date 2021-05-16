@@ -6,8 +6,17 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { FbAuth } from './services/fb-auth.service';
 import { AppRoutingModule } from './app-routing.module';
+import * as firebaseui from 'firebaseui';
+import { firebase, FirebaseUIModule } from 'firebaseui-angular';
+
+const firebaseUiAuthConfig: firebaseui.auth.Config = {
+    signInFlow: 'popup',
+    signInOptions: [
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+    ]
+};
 
 @NgModule({
     declarations: [AppComponent],
@@ -17,9 +26,10 @@ import { AppRoutingModule } from './app-routing.module';
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFirestoreModule,
         AngularFireAuthModule,
-        AppRoutingModule
+        AppRoutingModule,
+        FirebaseUIModule.forRoot(firebaseUiAuthConfig)
     ],
-    providers: [FbAuth],
+    providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule {

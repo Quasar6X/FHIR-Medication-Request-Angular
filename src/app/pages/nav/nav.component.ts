@@ -13,6 +13,7 @@ import User = firebase.User;
 export class NavComponent implements OnInit {
 
     user: User | null = null;
+    disableProfileMenu = true;
 
     constructor(private router: Router, private authService: FbAuth, private snackbar: MatSnackBar) {
     }
@@ -21,6 +22,9 @@ export class NavComponent implements OnInit {
         this.authService.auth.onAuthStateChanged((user) => {
             if (user) {
                 this.user = user;
+                if (!user.isAnonymous) {
+                    this.disableProfileMenu = false;
+                }
             } else {
                 this.router.navigate(['/login']).then();
             }
@@ -29,7 +33,7 @@ export class NavComponent implements OnInit {
 
     logout(): void {
         this.authService.signOut().then(() => {
-            this.snackbar.open('Signed out successfully', 'OK', {duration: 10000});
+            this.snackbar.open('Signed out successfully! \ud83c\udf89', 'OK', {duration: 10000});
             this.router.navigate(['login']).then();
         }).catch(error => {
             this.snackbar.open(error.message, 'OK', {duration: 10000});

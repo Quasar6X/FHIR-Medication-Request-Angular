@@ -22,11 +22,11 @@ export class FbAuth {
     }
 
     get isLoggedIn(): boolean {
-        return this.afAuth.currentUser !== null;
+        return this.afAuth.authState !== null;
     }
 
     signOut(): Promise<void> {
-        return this.afAuth.signOut().then();
+        return this.afAuth.signOut();
     }
 
     get auth(): AngularFireAuth {
@@ -35,7 +35,7 @@ export class FbAuth {
 
     modifyUser(name: string): Promise<void> {
         return this.afAuth.currentUser.then(user => {
-            user.updateProfile({ displayName: name, photoURL: null }).then();
+            user.updateProfile({displayName: name, photoURL: null}).then();
         });
     }
 }

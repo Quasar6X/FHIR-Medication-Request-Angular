@@ -1,0 +1,51 @@
+<app-container classes="container-1 flex" style="align-content: flex-start; justify-content: flex-start">
+    <mat-card class="main-card" cdkDropList (cdkDropListDropped)="drop($event, complexQueriesOne)">
+        <mat-card-header>
+            <mat-card-title>All Medication Requests with dosage instructions</mat-card-title>
+        </mat-card-header>
+        <mat-card-content *ngFor="let request of complexQueriesOne" class="request-card-container">
+            <mat-card class="mat-elevation-z16 request-card" cdkDrag>
+                <div>ID: {{(request | asMedicationRequest).id}}</div>
+                <div *ngFor="let identifier of request?.identifier">User: {{identifier.uid.value}}, {{identifier.email.value}}, {{identifier.displayName.value}}</div>
+                <div>Status: {{request.status}}</div>
+                <div *ngIf="request?.statusReason">Status reason: {{request.statusReason}}</div>
+                <div>Intent: {{request.intent}}</div>
+                <div *ngFor="let category of request?.category">Category: {{category.text}}</div>
+                <div *ngIf="request?.priority">Priority: {{request.priority}}</div>
+                <div *ngIf="request?.doNotPerform">Perform: {{request.doNotPerform ? 'No': 'Yes'}}</div>
+                <div *ngIf="request?.reported">Reported: {{request.reported ? 'Yes': 'No'}}</div>
+                <div>Medication: {{request.medication}}</div>
+                <div>Subject: {{request.subject}}</div>
+                <div *ngIf="request?.authoredOn">Authored on: {{request.authoredOn.toDate().toLocaleString()}}</div>
+                <div *ngFor="let note of request?.note">Note: {{note?.author.authorString}}, {{note?.time.toDate().toLocaleString()}}, {{note.text}}</div>
+                <div *ngFor="let dosage of request?.dosageInstruction">Dosage instruction: {{dosage.text}}</div>
+                <div *ngIf="request?.substitution">Substitution: {{request.substitution.allowed}}, {{request.substitution?.reason}}</div>
+            </mat-card>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="main-card" cdkDropList (cdkDropListDropped)="drop($event, complexQueriesTwo)">
+        <mat-card-header>
+            <mat-card-title>All Medication Requests where status is not "completed"</mat-card-title>
+        </mat-card-header>
+        <mat-card-content *ngFor="let request of complexQueriesTwo" class="request-card-container">
+            <mat-card class="mat-elevation-z16 request-card" cdkDrag>
+                <div>ID: {{(request | asMedicationRequest).id}}</div>
+                <div *ngFor="let identifier of request?.identifier">User: {{identifier.uid.value}}, {{identifier.email.value}}, {{identifier.displayName.value}}</div>
+                <div>Status: {{request.status}}</div>
+                <div *ngIf="request?.statusReason">Status reason: {{request.statusReason}}</div>
+                <div>Intent: {{request.intent}}</div>
+                <div *ngFor="let category of request?.category">Category: {{category.text}}</div>
+                <div *ngIf="request?.priority">Priority: {{request.priority}}</div>
+                <div *ngIf="request?.doNotPerform">Perform: {{request.doNotPerform ? 'No': 'Yes'}}</div>
+                <div *ngIf="request?.reported">Reported: {{request.reported ? 'Yes': 'No'}}</div>
+                <div>Medication: {{request.medication}}</div>
+                <div>Subject: {{request.subject}}</div>
+                <div *ngIf="request?.authoredOn">Authored on: {{request.authoredOn.toDate().toLocaleString()}}</div>
+                <div *ngFor="let note of request?.note">Note: {{note?.author.authorString}}, {{note?.time.toDate().toLocaleString()}}, {{note.text}}</div>
+                <div *ngFor="let dosage of request?.dosageInstruction">Dosage instruction: {{dosage.text}}</div>
+                <div *ngIf="request?.substitution">Substitution: {{request.substitution.allowed}}, {{request.substitution?.reason}}</div>
+            </mat-card>
+        </mat-card-content>
+    </mat-card>
+</app-container>

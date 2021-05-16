@@ -22,6 +22,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DeleteModule } from '../delete/delete.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { EditModule } from '../edit/edit.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { OnHoverModule } from '../../../shared/directives/on-hover/on-hover.module';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import { EditModule } from '../edit/edit.module';
         MatSnackBarModule,
         DeleteModule,
         MatTooltipModule,
-        EditModule
+        EditModule,
+        DragDropModule,
+        OnHoverModule,
     ]
 })
 export class TableModule { }

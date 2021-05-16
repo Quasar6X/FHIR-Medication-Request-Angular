@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
 import { MatButtonModule } from '@angular/material/button';
+import { OnHoverModule } from '../../directives/on-hover/on-hover.module';
 
 
 
@@ -33,7 +34,8 @@ import { MatButtonModule } from '@angular/material/button';
         MatDatepickerModule,
         NgxMatDatetimePickerModule,
         NgxMatNativeDateModule,
-        MatButtonModule
+        MatButtonModule,
+        OnHoverModule
     ]
 })
 export class MedicationRequestFormModule { }

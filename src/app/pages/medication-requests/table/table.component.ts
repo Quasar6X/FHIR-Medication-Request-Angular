@@ -11,6 +11,8 @@ import { AddComponent } from '../add/add.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteComponent } from '../delete/delete.component';
 import { EditComponent } from '../edit/edit.component';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { FbAuth } from '../../../services/fb-auth.service';
 
 interface TableData {
     columnData: string;
@@ -47,14 +49,18 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     ];
     columnDataStr: string[] = this.columnData.map(data => data.columnData);
 
+    dragDropCards: string[] = ['identifier', 'category', 'note', 'dosage'];
+
     subs: Subscription[] = [];
     expandedRequest: MedicationRequest | null;
     isLoading = true;
 
+    disabled = true;
+
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor(private service: FbBaseService, private dialog: MatDialog, private snackbar: MatSnackBar) {
+    constructor(private service: FbBaseService, private dialog: MatDialog, private snackbar: MatSnackBar, private authService: FbAuth) {
         this.dataSource = new MatTableDataSource<MedicationRequest>();
     }
 
@@ -64,6 +70,11 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
             this.dataSource.sort = this.sort;
             this.isLoading = false;
         }));
+        this.authService.auth.onAuthStateChanged(user => {
+            if (user) {
+                this.disabled = user.isAnonymous;
+            }
+        }).then();
     }
 
     ngAfterViewInit(): void {
@@ -85,7 +96,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
         this.subs.concat(dialogRef.afterClosed().subscribe((request: MedicationRequest) => {
             if (request?.status) {
                 this.service.add(request).then(() => {
-                    this.snackbar.open('Uploaded medication request', 'OK', {duration: 10000});
+                    this.snackbar.open('Uploaded medication request! \ud83c\udf89', 'OK', {duration: 10000});
                 });
             }
         }, error => {
@@ -106,7 +117,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
         this.subs.concat(dialogRef.afterClosed().subscribe((medicationRequest: MedicationRequest) => {
             if (medicationRequest?.status) {
                 this.service.update(medicationRequest).then(() => {
-                    this.snackbar.open('Updated medication request', 'OK', {duration: 10000});
+                    this.snackbar.open('Updated medication request! \ud83c\udf89', 'OK', {duration: 10000});
                 });
             }
         }, error => {
@@ -127,7 +138,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
         this.subs.concat(dialogRef.afterClosed().subscribe((decision: boolean) => {
             if (decision === true) {
                 this.service.delete(id).then(() => {
-                    this.snackbar.open('Deleted medication request', 'OK', {duration: 10000});
+                    this.snackbar.open('Deleted medication request! \ud83c\udf89', 'OK', {duration: 10000});
                 });
             }
         }, error => {
@@ -135,6 +146,10 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
         }, () => {
             this.isLoading = false;
         }));
+    }
+
+    drop(event: CdkDragDrop<string[]>): void {
+        moveItemInArray(this.dragDropCards, event.previousIndex, event.currentIndex);
     }
 
     ngOnDestroy(): void {

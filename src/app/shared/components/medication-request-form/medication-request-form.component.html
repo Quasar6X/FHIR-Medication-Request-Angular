@@ -25,7 +25,7 @@
             <mat-card-title>Identifiers</mat-card-title>
         </mat-card-header>
         <mat-card-content formArrayName="identifier">
-            <button mat-raised-button color="accent" class="list-add-btn" (click)="addIdentifier()">
+            <button mat-raised-button color="accent" class="list-add-btn" (click)="addIdentifier()" appOnHover>
                 <mat-icon>add</mat-icon>
                 Identifier
             </button>
@@ -49,7 +49,7 @@
                         <mat-label>Name</mat-label>
                         <input matInput type="text" name="displayName" placeholder="E.g BobTheBingiest" formControlName="value">
                     </mat-form-field>
-                    <button mat-icon-button color="warn" (click)="removeIdentifier(i)">
+                    <button mat-icon-button color="warn" (click)="removeIdentifier(i)" appOnHover>
                         <mat-icon>delete</mat-icon>
                     </button>
                 </ng-container>
@@ -112,7 +112,7 @@
             <mat-card-title>Categories</mat-card-title>
         </mat-card-header>
         <mat-card-content formArrayName="category">
-            <button mat-raised-button color="accent" class="list-add-btn" (click)="addCategory()" [disabled]="categoryLength >= 4">
+            <button mat-raised-button color="accent" class="list-add-btn" (click)="addCategory()" [disabled]="categoryLength >= 4" appOnHover>
                 <mat-icon>add</mat-icon>
                 Category
             </button>
@@ -125,7 +125,7 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <button mat-icon-button color="warn" (click)="removeCategory(i)">
+                    <button mat-icon-button color="warn" (click)="removeCategory(i)" appOnHover>
                         <mat-icon>delete</mat-icon>
                     </button>
                 </ng-container>
@@ -230,7 +230,7 @@
             <mat-card-title>Notes</mat-card-title>
         </mat-card-header>
         <mat-card-content formArrayName="note">
-            <button mat-raised-button color="accent" class="list-add-btn" (click)="addNote()">
+            <button mat-raised-button color="accent" class="list-add-btn" (click)="addNote()" appOnHover>
                 <mat-icon>add</mat-icon>
                 Note
             </button>
@@ -250,7 +250,7 @@
                         <mat-label>Text</mat-label>
                         <input matInput type="text" name="note" placeholder="I.e your beautiful thoughts" formControlName="text">
                     </mat-form-field>
-                    <button mat-icon-button color="warn" (click)="removeNote(i)">
+                    <button mat-icon-button color="warn" (click)="removeNote(i)" appOnHover>
                         <mat-icon>delete</mat-icon>
                     </button>
                 </ng-container>
@@ -263,7 +263,7 @@
             <mat-card-title>Dosage instructions</mat-card-title>
         </mat-card-header>
         <mat-card-content formArrayName="dosageInstruction">
-            <button mat-raised-button color="accent" class="list-add-btn" (click)="addDosageInstruction()">
+            <button mat-raised-button color="accent" class="list-add-btn" (click)="addDosageInstruction()" appOnHover>
                 <mat-icon>add</mat-icon>
                 Dosage instruction
             </button>
@@ -273,7 +273,7 @@
                         <mat-label>Text</mat-label>
                         <input matInput type="text" name="dosageInstruction" placeholder="I.e your beautiful thoughts" formControlName="text">
                     </mat-form-field>
-                    <button mat-icon-button color="warn" (click)="removeDosageInstruction(i)">
+                    <button mat-icon-button color="warn" (click)="removeDosageInstruction(i)" appOnHover>
                         <mat-icon>delete</mat-icon>
                     </button>
                 </ng-container>

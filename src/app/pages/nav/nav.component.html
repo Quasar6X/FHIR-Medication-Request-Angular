@@ -1,19 +1,28 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <a mat-button [routerLink]="[ '/home' ]">
+        <a mat-button [routerLink]="[ '/home' ]" appOnHover>
             <mat-icon class="hero-icon">local_hospital</mat-icon>
             <span>Medication Requests</span>
         </a>
+        <button mat-button [routerLink]="[ '/home/complex' ]" appOnHover>
+            <mat-icon style="margin-right: 0.33rem">whatshot</mat-icon>
+            <span>Complex Queries</span>
+        </button>
         <span style="flex: 1 1;"></span>
-        <button mat-button [matMenuTriggerFor]="menu">
+        <button mat-button [matMenuTriggerFor]="menu" appOnHover>
             <mat-icon>account_circle</mat-icon>
             <ng-container *ngIf="user">
-                {{user.displayName}}&nbsp;
+                <ng-container *ngIf="!user.isAnonymous else anonym">
+                    {{user.displayName}}&nbsp;
+                </ng-container>
+                <ng-template #anonym>
+                    Guest
+                </ng-template>
             </ng-container>
             <mat-icon>arrow_drop_down</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="editProfile()">
+            <button mat-menu-item (click)="editProfile()" [disabled]="disableProfileMenu">
                 <mat-icon>person</mat-icon>
                 <span>Profile</span>
             </button>

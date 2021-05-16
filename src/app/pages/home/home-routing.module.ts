@@ -1,7 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './home.component';
-import { AuthGuard } from '../../shared/guard/auth.guard';
 
 const routes: Routes = [
     {
@@ -15,9 +14,12 @@ const routes: Routes = [
         children: [
             {
                 path: 'table-view',
-                loadChildren: () => import('../medication-requests/table/table.module').then(m => m.TableModule),
-                canActivate: [AuthGuard]
+                loadChildren: () => import('../medication-requests/table/table.module').then(m => m.TableModule)
             },
+            {
+                path: 'complex',
+                loadChildren: () => import('../medication-requests/complex-queries/complex-queries.module').then(m => m.ComplexQueriesModule)
+            }
         ]
     }
 ];

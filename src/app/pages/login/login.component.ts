@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { getUserForm } from '../../shared/forms/user.form';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { FirebaseUISignInFailure, FirebaseUISignInSuccessWithAuthResult } from 'firebaseui-angular';
 
 @Component({
     selector: 'app-login',
@@ -27,13 +28,22 @@ export class LoginComponent implements OnInit {
     login(): void {
         this.authService.signIn(this.form.value.user.email.value, this.form.value.password).then(() => {
             this.navigateTo('/home');
-            this.snackBar.open('Login Successful', 'OK', { duration: 10000 });
+            this.snackBar.open('Login Successful! \ud83c\udf89', 'OK', {duration: 10000});
         }).catch(error => {
-            this.snackBar.open(error.message, 'OK', { duration: 10000 });
+            this.snackBar.open(error.message, 'OK', {duration: 10000});
         });
     }
 
     navigateTo(url: string): void {
         this.router.navigate([url]).then();
+    }
+
+    success(event: FirebaseUISignInSuccessWithAuthResult): void {
+        this.navigateTo('/home');
+        this.snackBar.open('Login Successful! \ud83c\udf89', 'OK', {duration: 10000});
+    }
+
+    error(event: FirebaseUISignInFailure): void {
+        this.snackBar.open(event.code, 'OK', {duration: 10000});
     }
 }

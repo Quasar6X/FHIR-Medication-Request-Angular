@@ -8,6 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DelayModule } from '../../shared/directives/delay/delay.module';
+import { ContainerModule } from '../../shared/components/container/container.module';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { ReactiveFormsModule } from '@angular/forms';
         MatInputModule,
         MatButtonModule,
         MatSnackBarModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        DelayModule,
+        ContainerModule
     ]
 })
 export class RegistrationModule {

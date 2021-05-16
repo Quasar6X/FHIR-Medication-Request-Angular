@@ -37,7 +37,7 @@ export class RegistrationComponent implements OnInit {
 
     register(): void {
         this.authService.register(this.form.value.user.email.value, this.form.value.pwd1, this.form.value.user.displayName.value).then(() => {
-            this.snackBar.open('Registering is successful', 'OK', {duration: 10000});
+            this.snackBar.open('Registering is successful! \ud83c\udf89', 'OK', {duration: 10000});
             this.navigateTo('/home');
         }).catch((error) => {
             this.snackBar.open(error.message, 'OK', {duration: 10000});

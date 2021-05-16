@@ -8,6 +8,9 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ContainerModule } from '../../shared/components/container/container.module';
+import { DelayModule } from '../../shared/directives/delay/delay.module';
+import { FirebaseUIModule } from 'firebaseui-angular';
 
 
 @NgModule({
@@ -21,6 +24,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
         MatButtonModule,
         MatSnackBarModule,
         ReactiveFormsModule,
+        ContainerModule,
+        DelayModule,
+        FirebaseUIModule,
     ]
 })
 export class LoginModule {

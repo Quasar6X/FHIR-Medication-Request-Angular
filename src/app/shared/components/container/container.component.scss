@@ -5,7 +5,7 @@
 
 @media (min-width: 0) {
   .container-1 {
-    padding-top: 24px;
+    padding: 1em;
   }
 }
 
@@ -13,12 +13,25 @@
   .container-1 {
     padding-right: 15px;
     padding-left: 15px;
+    padding-top: 24px;
   }
 }
 
 @media (min-width: 991px) {
   .container-1 {
-    width: calc(700% / 9);
+    width: calc(961px - 230px);
+  }
+}
+
+@media (min-width: 1200px) {
+  .container-1 {
+    width: calc(1170px - 230px);
+  }
+}
+
+@media (min-width: 1600px) {
+  .container-1 {
+    width: 1440px;
   }
 }
 

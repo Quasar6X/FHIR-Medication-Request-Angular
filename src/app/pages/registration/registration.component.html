@@ -1,39 +1,41 @@
-<div class="centering">
-    <mat-card class="reg-card">
-        <form [formGroup]="form" (ngSubmit)="register()">
-            <h3>Register</h3>
-            <ng-container formGroupName="user">
-                <ng-container formGroupName="displayName">
-                    <mat-form-field class="max-width" appearance="outline">
-                        <mat-label>Username</mat-label>
-                        <input matInput type="text" name="displayName" placeholder="E.g. BobTheBingiest" formControlName="value">
-                    </mat-form-field>
+<app-container>
+    <div class="centering">
+        <mat-card class="reg-card">
+            <form [formGroup]="form" (ngSubmit)="register()">
+                <h3>Register</h3>
+                <ng-container formGroupName="user">
+                    <ng-container formGroupName="displayName">
+                        <mat-form-field class="max-width" appearance="outline">
+                            <mat-label>Username</mat-label>
+                            <input matInput type="text" name="displayName" placeholder="E.g. BobTheBingiest" formControlName="value">
+                        </mat-form-field>
+                    </ng-container>
+                    <ng-container formGroupName="email">
+                        <mat-form-field class="max-width" appearance="outline">
+                            <mat-label>E-mail</mat-label>
+                            <input matInput type="email" name="email" placeholder="E.g. bob@bingi.com" formControlName="value">
+                        </mat-form-field>
+                    </ng-container>
                 </ng-container>
-                <ng-container formGroupName="email">
-                    <mat-form-field class="max-width" appearance="outline">
-                        <mat-label>E-mail</mat-label>
-                        <input matInput type="email" name="email" placeholder="E.g. bob@bingi.com" formControlName="value">
-                    </mat-form-field>
-                </ng-container>
-            </ng-container>
-            <mat-form-field class="max-width" appearance="outline">
-                <mat-label>Password</mat-label>
-                <input matInput type="password" name="password" #pwd1 minlength="6" placeholder="Password" formControlName="pwd1">
-                <mat-hint align="end">min. length {{pwd1.value.length}} / 6</mat-hint>
-            </mat-form-field>
-            <mat-form-field class="max-width" appearance="outline">
-                <mat-label>Password again</mat-label>
-                <input matInput type="password" name="password" #pwd2 minlength="6" placeholder="Password again" formControlName="pwd2">
-                <mat-hint align="end">min. length {{pwd2.value.length}} / 6</mat-hint>
-            </mat-form-field>
-            <mat-error *ngIf="form.hasError('passwordsDontMatch')">
-                Passwords must match!
-            </mat-error>
-            <button mat-raised-button type="submit" color="primary" class="max-width" [disabled]="form.invalid">Register</button>
-            <div class="bottom">
-                <div>Already have an account?</div>
-                <button mat-button color="accent" (click)="navigateTo('/login')">Login</button>
-            </div>
-        </form>
-    </mat-card>
-</div>
+                <mat-form-field class="max-width" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" name="password" #pwd1 minlength="6" placeholder="Password" formControlName="pwd1">
+                    <mat-hint align="end">min. length {{pwd1.value.length}} / 6</mat-hint>
+                </mat-form-field>
+                <mat-form-field class="max-width" appearance="outline">
+                    <mat-label>Password again</mat-label>
+                    <input matInput type="password" name="password" #pwd2 minlength="6" placeholder="Password again" formControlName="pwd2">
+                    <mat-hint align="end">min. length {{pwd2.value.length}} / 6</mat-hint>
+                </mat-form-field>
+                <mat-error *ngIf="form.hasError('passwordsDontMatch')">
+                    Passwords must match!
+                </mat-error>
+                <button mat-raised-button type="submit" color="primary" class="max-width" [disabled]="form.invalid">Register</button>
+                <div class="bottom" *appDelay="1000">
+                    <div>Already have an account?</div>
+                    <button mat-button color="accent" (click)="navigateTo('/login')">Login</button>
+                </div>
+            </form>
+        </mat-card>
+    </div>
+</app-container>

@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
 
     user: User | null;
     form = getUserForm();
+    disable = true;
 
     constructor(private router: Router, private authService: FbAuth, private snackbar: MatSnackBar) {
     }
@@ -26,6 +27,16 @@ export class ProfileComponent implements OnInit {
                 this.form.get('uid').get('value').setValue(this.user.uid);
                 this.form.get('email').get('value').setValue(this.user.email);
                 this.form.get('displayName').get('value').setValue(this.user.displayName);
+                console.log(user.providerId);
+                this.disable = true;
+                user.providerData.forEach(data => {
+                    if (data.providerId === 'password') {
+                        this.disable = false;
+                    }
+                });
+                if (this.disable) {
+                    this.form.get('displayName').disable();
+                }
             }
         }).then();
 
@@ -36,7 +47,7 @@ export class ProfileComponent implements OnInit {
     modify(): void {
         this.authService.modifyUser(this.form.value.displayName.value).then(() => {
             this.router.navigate(['/profile']).then();
-            this.snackbar.open('Changes are saved', 'OK', { duration: 10000 });
+            this.snackbar.open('Changes are saved! \ud83c\udf89', 'OK', { duration: 10000 });
         }).catch(error => {
             this.snackbar.open(error.message, 'OK', { duration: 10000 });
         });

@@ -1,31 +1,33 @@
 <app-nav></app-nav>
-<div class="centering">
-    <mat-card class="log-card">
-        <form [formGroup]="form" (ngSubmit)="modify()">
-            <ng-container *ngIf="user">
-                <h3>{{user.displayName}}</h3>
-                <ng-container formGroupName="uid">
-                    <mat-form-field class="max-width" appearance="outline">
-                        <mat-label>UID</mat-label>
-                        <input matInput type="text" name="uid" formControlName="value">
-                    </mat-form-field>
+<app-container>
+    <div class="centering">
+        <mat-card class="log-card">
+            <form [formGroup]="form" (ngSubmit)="modify()">
+                <ng-container *ngIf="user">
+                    <h3>{{user.displayName}}</h3>
+                    <ng-container formGroupName="uid">
+                        <mat-form-field class="max-width" appearance="outline">
+                            <mat-label>UID</mat-label>
+                            <input matInput type="text" name="uid" formControlName="value">
+                        </mat-form-field>
+                    </ng-container>
+                    <ng-container formGroupName="email">
+                        <mat-form-field class="max-width" appearance="outline">
+                            <mat-label>E-mail</mat-label>
+                            <input matInput type="email" name="email" formControlName="value">
+                        </mat-form-field>
+                    </ng-container>
+                    <ng-container formGroupName="displayName">
+                        <mat-form-field class="max-width" appearance="outline">
+                            <mat-label>Username</mat-label>
+                            <input matInput type="text" name="displayName" placeholder="E.g BobTheBingiest" formControlName="value">
+                        </mat-form-field>
+                    </ng-container>
                 </ng-container>
-                <ng-container formGroupName="email">
-                    <mat-form-field class="max-width" appearance="outline">
-                        <mat-label>E-mail</mat-label>
-                        <input matInput type="email" name="email" formControlName="value">
-                    </mat-form-field>
-                </ng-container>
-                <ng-container formGroupName="displayName">
-                    <mat-form-field class="max-width" appearance="outline">
-                        <mat-label>Username</mat-label>
-                        <input matInput type="text" name="displayName" placeholder="E.g BobTheBingiest" formControlName="value">
-                    </mat-form-field>
-                </ng-container>
-            </ng-container>
-            <div style="text-align: center">
-                <button mat-raised-button type="submit" color="primary">Save changes</button>
-            </div>
-        </form>
-    </mat-card>
-</div>
+                <div style="text-align: center">
+                    <button mat-raised-button type="submit" color="primary" [disabled]="disable">Save changes</button>
+                </div>
+            </form>
+        </mat-card>
+    </div>
+</app-container>

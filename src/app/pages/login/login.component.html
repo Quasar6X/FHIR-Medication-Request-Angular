@@ -1,24 +1,27 @@
-<div class="centering">
-    <mat-card class="log-card">
-        <form [formGroup]="form" (ngSubmit)="login()">
-            <h3>Login</h3>
-            <ng-container formGroupName="user">
-                <ng-container formGroupName="email">
-                    <mat-form-field class="max-width" appearance="outline">
-                        <mat-label>E-mail</mat-label>
-                        <input matInput type="email" name="email" placeholder="E.g. bob@bingi.com" formControlName="value">
-                    </mat-form-field>
+<app-container>
+    <div class="centering">
+        <mat-card class="log-card">
+            <form [formGroup]="form" (ngSubmit)="login()">
+                <h3>Login</h3>
+                <ng-container formGroupName="user">
+                    <ng-container formGroupName="email">
+                        <mat-form-field class="max-width" appearance="outline">
+                            <mat-label>E-mail</mat-label>
+                            <input matInput type="email" name="email" placeholder="E.g. bob@bingi.com" formControlName="value">
+                        </mat-form-field>
+                    </ng-container>
                 </ng-container>
-            </ng-container>
-            <mat-form-field class="max-width" appearance="outline">
-                <mat-label>Password</mat-label>
-                <input matInput type="password" name="password" placeholder="Password" formControlName="password">
-            </mat-form-field>
-            <button mat-raised-button type="submit" color="primary" class="max-width" [disabled]="form.invalid">Login</button>
-            <div class="bottom">
+                <mat-form-field class="max-width" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" name="password" placeholder="Password" formControlName="password">
+                </mat-form-field>
+                <button mat-raised-button type="submit" color="primary" class="max-width" [disabled]="form.invalid">Sign in</button>
+            </form>
+            <firebase-ui class="max-width" (signInSuccessWithAuthResult)="success($event)" (signInFailure)="error($event)"></firebase-ui>
+            <div class="bottom" *appDelay="1000">
                 <div>Don't have an account?</div>
                 <button mat-button color="accent" (click)="navigateTo('/registration')">Register</button>
             </div>
-        </form>
-    </mat-card>
-</div>
+        </mat-card>
+    </div>
+</app-container>

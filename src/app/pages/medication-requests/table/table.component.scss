@@ -3,26 +3,24 @@
 $purple-palette: mat-palette($mat-purple);
 $orange-palette: mat-palette($mat-deep-orange);
 
-.table-container {
+mat-card {
   display: flex;
   flex-direction: column;
   min-width: 300px;
 }
 
-mat-row.detail-row {
-  flex-basis: 0;
-  min-height: initial;
+.table-container {
+  max-width: 100%;
+  overflow: auto;
 }
 
-mat-cell {
-  display: flex !important;
-  justify-content: center !important;
+td, th {
+  padding-left: 4px;
+  text-align: center;
 }
 
-mat-header-cell {
-  font-size: 1em;
-  display: flex;
-  justify-content: center;
+tr.detail-row {
+  height: 0;
 }
 
 .request-detail {
@@ -30,19 +28,20 @@ mat-header-cell {
   overflow: hidden;
   display: flex;
   align-items: flex-start;
-  align-content: space-evenly;
-  justify-content: space-evenly !important;
+  align-content: space-around;
+  justify-content: space-around !important;
   background: mat-color($purple-palette, A700);
 }
 
 .request-list-holder {
+  cursor: move;
   flex: 1 1 20%;
   margin: 1rem 0.7rem;
   background: mat-color($orange-palette, A200);
 }
 
 .action-btn {
-  flex: 1 1 5%;
+  flex: 1 1 10%;
   margin: 1rem 0.7rem;
 }
 
@@ -55,12 +54,12 @@ mat-header-cell {
   background: mat-color($purple-palette, 700);
 }
 
-mat-row.request-row:not(.request-expanded-row):hover {
+tr.request-row:not(.request-expanded-row):hover {
   cursor: pointer;
   background: mat-color($purple-palette, 700);
 }
 
-mat-row.request-row:not(.request-expanded-row):active {
+tr.request-row:not(.request-expanded-row):active {
   background: mat-color($purple-palette, 700);
 }
 
@@ -69,8 +68,9 @@ mat-row.request-row:not(.request-expanded-row):active {
 }
 
 .add-btn {
-  transform: scale(1.5);
+  width: 4em;
+  height: 4em;
   position: fixed;
-  bottom: 4rem;
-  right: 4rem;
+  bottom: 1.33rem;
+  right: 1.33rem;
 }
