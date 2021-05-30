@@ -7,8 +7,7 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AppRoutingModule } from './app-routing.module';
-import * as firebaseui from 'firebaseui';
-import { firebase, FirebaseUIModule } from 'firebaseui-angular';
+import { firebase, firebaseui, FirebaseUIModule } from 'firebaseui-angular';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
     signInFlow: 'popup',
